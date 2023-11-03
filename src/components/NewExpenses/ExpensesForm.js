@@ -2,25 +2,56 @@ import "./ExpensesForm.css";
 import { useState } from "react";
 
 const ExpensesForm = () => {
-  const [enteredtitle, setenteredtitle] = useState();
-  const [enteredamount, setenteredamount] = useState();
-  const [enteredlocation, setenteredlocation] = useState();
-  const [entereddate, setentereddate] = useState();
+//   const [enteredtitle, setenteredtitle] = useState();
+//   const [enteredamount, setenteredamount] = useState();
+//   const [enteredlocation, setenteredlocation] = useState();
+//   const [entereddate, setentereddate] = useState();
+
+const [userInput , setuserInput] = useState({
+    enterdtitle:'',
+    enterdamount:'',
+    enteredlocation:'',
+    enterddate:''
+});
 
   function titlechangeHandler(event) {
-    setenteredtitle(event.target.value);
+    //code below for using multiple state for each onChange
+    // setenteredtitle(event.target.value);
+    // code below for using single useState
+    // setuserInput({
+    //     ...userInput,
+    //     enterdtitle: event.target.value
+    // });
+    // code below is another method for using single useState 
+    setuserInput((prevState)=>{
+        return {...prevState , enterdtitle: event.target.value};
+    });
+
+
   }
 
   function amountchangehandler(event) {
-    setenteredamount(event.target.value);
+    //setenteredamount(event.target.value);
+    setuserInput({
+        ...userInput,
+        enterdamount: event.target.value
+    });
   }
 
   function locationchangeHandler(event) {
-    setenteredlocation(event.target.value);
+    //setenteredlocation(event.target.value);
+    setuserInput({
+        ...userInput,
+        enterdlocaton: event.target.value
+    });
   }
 
   function datechangeHandler(event) {
-    setentereddate(event.target.value);
+    //setentereddate(event.target.value);
+    setuserInput({
+        ...userInput,
+        enterddate: event.target.value
+    });
   }
 
   return (
