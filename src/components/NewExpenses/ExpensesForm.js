@@ -2,60 +2,43 @@ import "./ExpensesForm.css";
 import { useState } from "react";
 
 const ExpensesForm = () => {
-//   const [enteredtitle, setenteredtitle] = useState();
-//   const [enteredamount, setenteredamount] = useState();
-//   const [enteredlocation, setenteredlocation] = useState();
-//   const [entereddate, setentereddate] = useState();
-
-const [userInput , setuserInput] = useState({
-    enterdtitle:'',
-    enterdamount:'',
-    enteredlocation:'',
-    enterddate:''
-});
+  const [enteredtitle, setenteredtitle] = useState();
+  const [enteredamount, setenteredamount] = useState();
+  const [enteredlocation, setenteredlocation] = useState();
+  const [entereddate, setentereddate] = useState();
 
   function titlechangeHandler(event) {
-    //code below for using multiple state for each onChange
-    // setenteredtitle(event.target.value);
-    // code below for using single useState
-    // setuserInput({
-    //     ...userInput,
-    //     enterdtitle: event.target.value
-    // });
-    // code below is another method for using single useState 
-    setuserInput((prevState)=>{
-        return {...prevState , enterdtitle: event.target.value};
-    });
-
-
+    setenteredtitle(event.target.value);
   }
 
   function amountchangehandler(event) {
-    //setenteredamount(event.target.value);
-    setuserInput({
-        ...userInput,
-        enterdamount: event.target.value
-    });
+    setenteredamount(event.target.value);
   }
 
   function locationchangeHandler(event) {
-    //setenteredlocation(event.target.value);
-    setuserInput({
-        ...userInput,
-        enterdlocaton: event.target.value
-    });
+    setenteredlocation(event.target.value);
   }
 
   function datechangeHandler(event) {
-    //setentereddate(event.target.value);
-    setuserInput({
-        ...userInput,
-        enterddate: event.target.value
-    });
+    setentereddate(event.target.value);
+  }
+
+
+  const formsubmitHandler = (event)=>{
+    event.preventDefault();
+
+    const expenseData = {
+      title: enteredtitle,
+      amount: enteredamount,
+      location: enteredlocation,
+      date: new Date(entereddate),
+    };
+
+    console.log(expenseData)
   }
 
   return (
-    <form>
+    <form onSubmit={formsubmitHandler}>
       <div className="new-expense__controls ">
         <div className="new-expense__control">
           <label>Expense Title</label>
@@ -93,7 +76,7 @@ const [userInput , setuserInput] = useState({
           />
         </div>
         <div className="new-expense__actions">
-          <button>Add Expense</button>
+          <button type="submit">Add Expense</button>
         </div>
       </div>
     </form>
