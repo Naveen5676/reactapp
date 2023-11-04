@@ -1,11 +1,11 @@
 import "./ExpensesForm.css";
 import { useState } from "react";
 
-const ExpensesForm = () => {
-  const [enteredtitle, setenteredtitle] = useState();
-  const [enteredamount, setenteredamount] = useState();
-  const [enteredlocation, setenteredlocation] = useState();
-  const [entereddate, setentereddate] = useState();
+const ExpensesForm = (props) => {
+  const [enteredtitle, setenteredtitle] = useState('');
+  const [enteredamount, setenteredamount] = useState('');
+  const [enteredlocation, setenteredlocation] = useState('');
+  const [entereddate, setentereddate] = useState('');
 
   function titlechangeHandler(event) {
     setenteredtitle(event.target.value);
@@ -30,11 +30,17 @@ const ExpensesForm = () => {
     const expenseData = {
       title: enteredtitle,
       amount: enteredamount,
-      location: enteredlocation,
       date: new Date(entereddate),
+      location: enteredlocation,
     };
 
-    console.log(expenseData)
+    //console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
+
+    setenteredtitle("");
+    setenteredamount("");
+    setenteredlocation("");
+    setentereddate("");
   }
 
   return (
@@ -45,6 +51,7 @@ const ExpensesForm = () => {
           <input
             type="text"
             placeholder="Enter Title"
+            value={enteredtitle}
             onChange={titlechangeHandler}
           />
         </div>
@@ -55,6 +62,7 @@ const ExpensesForm = () => {
             placeholder="Enter Amount"
             min="0.01"
             step="0.01"
+            value={enteredamount}
             onChange={amountchangehandler}
           />
         </div>
@@ -63,6 +71,7 @@ const ExpensesForm = () => {
           <input
             type="text"
             placeholder="Enter Location"
+            value={enteredlocation}
             onChange={locationchangeHandler}
           />
         </div>
@@ -72,6 +81,7 @@ const ExpensesForm = () => {
             type="date"
             min="2019-01-01"
             max="2023-12-31"
+            value={entereddate}
             onChange={datechangeHandler}
           />
         </div>
