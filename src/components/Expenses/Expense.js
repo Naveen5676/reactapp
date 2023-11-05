@@ -18,7 +18,7 @@ const Expense = (props)=> {
         selected={filterdYear}
         onChangeFilter={FileChangeHandler}
       />
-      {props.items.map((expenses) => (
+      {props.items.filter(data => data.date.getFullYear() === parseInt(filterdYear)).map((expenses) => (
         <ExpenseItem
           key={expenses.id}
           title={expenses.title}
